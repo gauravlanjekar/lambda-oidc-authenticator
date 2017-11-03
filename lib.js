@@ -115,8 +115,6 @@ var verifyToken = function (token) {
     // decode the token without verification to have the kid value
     const kid = jwt.decode(token, {complete: true}).header.kid;
 
-    console.log(kid);
-
     // fetch the PEM Public Key
     const publicKey = keyCloakCerts.fetch(kid);
 

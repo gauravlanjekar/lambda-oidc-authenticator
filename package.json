@@ -4,7 +4,7 @@
   "description": "An AWS Lambda function to provide an oidc Custom Authenticator for AWS API Gateway ( tested with key-cloak). Inspired from lambda-auth0-authorizer",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/lambda-local -l index.js -e event.json -E '{\"certsPath\":\"http://<key-cloak.domain>/auth/realms/master/protocol/openid-connect/certs\"}'",
+    "test": "./node_modules/.bin/lambda-local -l index.js -e event.json",
     "zip": "rm -f lambda-oidc-authenticator.zip ; zip lambda-oidc-authenticator.zip -r *.js *.json .env node_modules/"
   },
   "author": "Gaurav Lanjekar",
