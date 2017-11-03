@@ -8,15 +8,19 @@ var ACCESS_TOKEN_LENGTH = 16; // (apparent) length of an Autho0 access_token
 // a .env file can be used as a development convenience. Real environment variables can be used in deployment and
 // will override anything loaded by dotenv.
 require('dotenv').config();
-const KeyCloakCerts = require('get-keycloak-public-key');
+const KeyCloakCerts = require('get-keycloak-public-key-node6');
 
 //certs path 'http://auth-server/auth/realms/master/protocol/openid-connect/certs'
 const keyCloakCerts = new KeyCloakCerts(process.env.certsPath);
 
 
+
+
 var fs = require('fs');
 var Promise = require('bluebird');
 Promise.longStackTraces();
+
+Promise.promisifyAll( Object.getPrototypeOf( keyCloakCerts ));
 
 
 ///// TODO : use promises to load these asynchronously
@@ -36,19 +40,7 @@ try {
   throw e;
 }
 
-var dynamoParametersFilename = 'dynamo.json';
-var dynamoParameters = null;
-try {
-  dynamoParameters = JSON.parse(fs.readFileSync(__dirname + '/' + dynamoParametersFilename, 'utf8'));
-} catch (e) {
-  if (e.code !== 'ENOENT') {
-    throw e;
-  }
-  // otherwise fallthrough
-}
-
 var jwt = require('jsonwebtoken');
-
 
 // extract and return the Bearer Token from the Lambda event parameters
 var getToken = function (params) {

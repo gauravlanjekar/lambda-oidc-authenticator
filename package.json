@@ -12,7 +12,7 @@
   "dependencies": {
     "bluebird": "^3.4.6",
     "dotenv": "^2.0.0",
-    "get-keycloak-public-key": "^1.0.2",
+    "get-keycloak-public-key-node6": "^1.0.3",
     "jsonwebtoken": "^8.1.0"
   },
   "devDependencies": {
